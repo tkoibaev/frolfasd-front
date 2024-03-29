@@ -1,43 +1,43 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "./Header.module.scss";
-import Button from "components/Button";
-import ModalWindow from "components/ModalWindow";
-import OrderForm from "components/OrderForm";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react"
+import styles from "./Header.module.scss"
+import Button from "components/Button"
+import ModalWindow from "components/ModalWindow"
+import OrderForm from "components/OrderForm"
+import { Link } from "react-router-dom"
 // import { Link as ScrollLink, scroller } from "react-scroll"
-import { motion, AnimatePresence } from "framer-motion";
-import { scroller, Link as ScrollLink } from "react-scroll";
-import BurgerIcon from "components/Icons/BurgerIcon";
-import { useIsAuth, setIsAuthAction } from "slices/AuthSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { useIsMainPage } from "slices/PageSlice";
+import { motion, AnimatePresence } from "framer-motion"
+import { scroller, Link as ScrollLink } from "react-scroll"
+import BurgerIcon from "components/Icons/BurgerIcon"
+import { useIsAuth, setIsAuthAction } from "slices/AuthSlice"
+import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
+import { useIsMainPage } from "slices/PageSlice"
 const Header = () => {
-  const dispatch = useDispatch();
-  const isAuth = useIsAuth();
-  const isMainPage = useIsMainPage();
-  const [isModalFormOpened, setIsModalFormOpened] = useState(false);
-  const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch()
+  const isAuth = useIsAuth()
+  const isMainPage = useIsMainPage()
+  const [isModalFormOpened, setIsModalFormOpened] = useState(false)
+  const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const checkIfClickedOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsBurgerMenuOpened(false);
+        setIsBurgerMenuOpened(false)
       }
-    };
+    }
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener("mousedown", checkIfClickedOutside)
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [])
 
   const onExitButtonClick = () => {
-    dispatch(setIsAuthAction(false));
-    localStorage.removeItem("token");
-    toast.success("Вы успешно вышли из режима администратора!");
-  };
+    dispatch(setIsAuthAction(false))
+    localStorage.removeItem("token")
+    toast.success("Вы успешно вышли из режима администратора!")
+  }
 
   return (
     <div className={styles.header} id="header">
@@ -62,8 +62,8 @@ const Header = () => {
               <Link
                 onClick={() => {
                   setTimeout(() => {
-                    scroller.scrollTo("faq", { smooth: true, duration: 500 });
-                  }, 100);
+                    scroller.scrollTo("faq", { smooth: true, duration: 500 })
+                  }, 100)
                 }}
                 to="/frolfasd"
               >
@@ -83,8 +83,8 @@ const Header = () => {
                     scroller.scrollTo("contacts", {
                       smooth: true,
                       duration: 500,
-                    });
-                  }, 100);
+                    })
+                  }, 100)
                 }}
                 to="/frolfasd"
               >
@@ -152,6 +152,13 @@ const Header = () => {
                 >
                   Портфолио
                 </Link>
+                <Link
+                  onClick={() => setIsBurgerMenuOpened(false)}
+                  // className={styles["burger__menu-item"]}
+                  to={"/info"}
+                >
+                  О технологии
+                </Link>
                 {isMainPage ? (
                   <ScrollLink to="faq" smooth={true} duration={500}>
                     Помощь
@@ -163,8 +170,8 @@ const Header = () => {
                         scroller.scrollTo("faq", {
                           smooth: true,
                           duration: 500,
-                        });
-                      }, 100);
+                        })
+                      }, 100)
                     }}
                     to="/frolfasd"
                   >
@@ -182,8 +189,8 @@ const Header = () => {
                         scroller.scrollTo("contacts", {
                           smooth: true,
                           duration: 500,
-                        });
-                      }, 100);
+                        })
+                      }, 100)
                     }}
                     to="/frolfasd"
                   >
@@ -193,7 +200,7 @@ const Header = () => {
                 {isAuth && (
                   <Link
                     onClick={() => {
-                      setIsBurgerMenuOpened(false);
+                      setIsBurgerMenuOpened(false)
                     }}
                     to="/administration"
                   >
@@ -204,8 +211,8 @@ const Header = () => {
                   <Link
                     to="/"
                     onClick={() => {
-                      onExitButtonClick();
-                      setIsBurgerMenuOpened(false);
+                      onExitButtonClick()
+                      setIsBurgerMenuOpened(false)
                     }}
                   >
                     Выйти
@@ -214,7 +221,7 @@ const Header = () => {
                 {!isAuth && (
                   <div
                     onClick={() => {
-                      setIsModalFormOpened(true), setIsBurgerMenuOpened(false);
+                      setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
                     }}
                   >
                     {" "}
@@ -232,12 +239,12 @@ const Header = () => {
       >
         <OrderForm
           onSuccessfulSubmit={() => {
-            setIsModalFormOpened(false);
+            setIsModalFormOpened(false)
           }}
         />
       </ModalWindow>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

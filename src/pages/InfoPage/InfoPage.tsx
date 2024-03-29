@@ -1,46 +1,60 @@
-import React from "react";
-import styles from "./InfoPage.module.scss";
-import AboutCompanyBlock from "components/AboutCompanyBlock";
-import scheme from "assets/0446aae8b8230d81e3b95cec70aa1902.png";
+import React, { useEffect } from "react"
+import styles from "./InfoPage.module.scss"
+import AboutCompanyBlock from "components/AboutCompanyBlock"
+import scheme from "assets/0446aae8b8230d81e3b95cec70aa1902.png"
+import clsx from "clsx"
+import { useDispatch } from "react-redux"
+import { setIsMainPageAction } from "slices/PageSlice"
 
 const InfoPage = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setIsMainPageAction(false))
+  }, [])
   return (
     <>
-      <AboutCompanyBlock />
       <div className={styles.info__page}>
+        <AboutCompanyBlock />
         <div className={styles["info__page-wrapper"]}>
-          <h2 className={styles["info__page-title"]}>Возможности применения</h2>
-          <p className={styles["info__page-text"]}>
-            Применение композитных панелей из алюминия возможно как снаружи
-            здания так и в помещениях. Для вентилируемых фасадов используют два
-            варианта композитных панелей
-          </p>
-          <div className={styles["info__page-items"]}>
-            <div className={styles["info__page-item"]}>
-              <h4 className={styles["info__page-item-title"]}>
-                Кассетная форма
-              </h4>
-              <p className={styles["info__page-item-text"]}>
-                Кассетную форму придают посредством фрезеровки композита. При
-                фрезеровке снимается часть слоев, что позволяет загнуть
-                вырезанный отрезок. Кассета из композита может иметь практически
-                любые формы и размеры.
+          <div className={styles["info__page-abilities"]}>
+            <div>
+              <h2 className={styles["info__page-title"]}>
+                Возможности применения
+              </h2>
+              <p className={styles["info__page-text"]}>
+                Применение композитных панелей из алюминия возможно как снаружи
+                здания так и в помещениях. Для вентилируемых фасадов используют
+                два варианта композитных панелей
               </p>
             </div>
-            <div className={styles["info__page-items-line"]}></div>
+            <div className={styles["info__page-items"]}>
+              <div className={styles["info__page-item"]}>
+                <h4 className={styles["info__page-item-title"]}>
+                  Кассетная форма
+                </h4>
+                <p className={styles["info__page-item-text"]}>
+                  Кассетную форму придают посредством фрезеровки композита. При
+                  фрезеровке снимается часть слоев, что позволяет загнуть
+                  вырезанный отрезок. Кассета из композита может иметь
+                  практически любые формы и размеры.
+                </p>
+              </div>
+              <div className={styles["info__page-items-line"]}></div>
 
-            <div className={styles["info__page-item"]}>
-              <h4 className={styles["info__page-item-title"]}>
-                Кассетная форма
-              </h4>
-              <p className={styles["info__page-item-text"]}>
-                Кассетную форму придают посредством фрезеровки композита. При
-                фрезеровке снимается часть слоев, что позволяет загнуть
-                вырезанный отрезок. Кассета из композита может иметь практически
-                любые формы и размеры.
-              </p>
+              <div className={styles["info__page-item"]}>
+                <h4 className={styles["info__page-item-title"]}>
+                  Панельная форма
+                </h4>
+                <p className={styles["info__page-item-text"]}>
+                  Для облицовки фасадов композитом панельного образца используют
+                  более толстый вариант листа, его раскраивают на определенные
+                  размеры и устанавливают на заклепки (крючки) непосредственно к
+                  направляющим системы.
+                </p>
+              </div>
             </div>
           </div>
+
           <div className={styles["info__page-details"]}>
             <div className={styles["info__page-details-wrapper"]}>
               <h2
@@ -111,37 +125,56 @@ const InfoPage = () => {
             </div>
           </div>
 
-          <h2 className={styles["info__page-title"]}>
-            Структурная схема вентилируемого фасада
-          </h2>
-
           <div className={styles["info__page-structure"]}>
-            <img
-              className={styles["info__page-structure-image"]}
-              src={scheme}
-              alt="scheme"
-            />
+            <h2 className={styles["info__page-title"]}>
+              Структурная схема вентилируемого фасада
+            </h2>
+            <div className={styles["info__page-structure-content"]}>
+              <div className={styles["info__page-structure-image"]}>
+                <img src={scheme} alt="scheme" />
+              </div>
 
-            <div className={styles["info__page-structure-info"]}>
-              <ol className={styles["info__page-structure-list"]}>
-                <li>Минераловатный утеплитель</li>
-                <li>Ветро влагозащитная пленка</li>
-                <li>Несущий горизонтальный профиль</li>
-                <li>Несущий вертикальный профиль</li>
-                <li>Композитная панель</li>
-              </ol>
+              <div className={styles["info__page-structure-info"]}>
+                <ol className={styles["info__page-list"]}>
+                  <li>Минераловатный утеплитель</li>
+                  <li>Ветро влагозащитная пленка</li>
+                  <li>Несущий горизонтальный профиль</li>
+                  <li>Несущий вертикальный профиль</li>
+                  <li>Композитная панель</li>
+                </ol>
 
-              <p className={styles["info__page-text"]}>
-                Обрешетка устанавливается с определенным шагом для монтажа
-                облицовки. Возможно применение не только
-                горизонтально-вертикального каркаса системы, но и вертикального.
-                Это позволяет в некоторых случаях значительно сэкономить на
-                подсистеме для фасадных кассет. Вентилируемый зазор,
-                образованный каркасом системы, позволяет свободно циркулировать
-                воздуху, выводя излишки влаги и равномерно выравнивая
-                температуру по всей поверхности стены.
-              </p>
+                <p
+                  className={clsx(
+                    styles["info__page-text"],
+                    styles["info__page-text-start"]
+                  )}
+                >
+                  Обрешетка устанавливается с определенным шагом для монтажа
+                  облицовки. Возможно применение не только
+                  горизонтально-вертикального каркаса системы, но и
+                  вертикального. Это позволяет в некоторых случаях значительно
+                  сэкономить на подсистеме для фасадных кассет. Вентилируемый
+                  зазор, образованный каркасом системы, позволяет свободно
+                  циркулировать воздуху, выводя излишки влаги и равномерно
+                  выравнивая температуру по всей поверхности стены.
+                </p>
+              </div>
             </div>
+            <p
+              className={clsx(
+                styles["info__page-text"],
+                styles["info__page-text-end"]
+              )}
+            >
+              Обрешетка устанавливается с определенным шагом для монтажа
+              облицовки. Возможно применение не только
+              горизонтально-вертикального каркаса системы, но и вертикального.
+              Это позволяет в некоторых случаях значительно сэкономить на
+              подсистеме для фасадных кассет. Вентилируемый зазор, образованный
+              каркасом системы, позволяет свободно циркулировать воздуху, выводя
+              излишки влаги и равномерно выравнивая температуру по всей
+              поверхности стены.
+            </p>
           </div>
 
           <div
@@ -163,7 +196,7 @@ const InfoPage = () => {
                   монтажных, к ним относятся:
                 </p>
 
-                <ul className={styles["info__page-text"]}>
+                <ul className={styles["info__page-list"]}>
                   <li>
                     · Первичное определение материалов и колористического
                     исполнения
@@ -196,7 +229,7 @@ const InfoPage = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default InfoPage;
+export default InfoPage

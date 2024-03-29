@@ -2,10 +2,16 @@
 @import "../../styles/mixins.scss";
 
 .info__page {
-  max-width: $content-width;
-  width: 85vw;
   min-height: 100vh;
-  margin: 0 auto;
+
+  &-abilities {
+    max-width: $content-width;
+    width: 85vw;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
 
   &-title {
     font-size: 36px;
@@ -16,13 +22,22 @@
 
   &-text {
     font-size: 24px;
+
+    &-end {
+      display: none;
+    }
   }
 
   &-list {
     font-size: 24px;
+    font-weight: 700;
+    list-style-position: inside;
   }
 
   &-items {
+    max-width: $content-width;
+    width: 85vw;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -35,7 +50,7 @@
   }
 
   &-item {
-    padding-bottom: 40px;
+    padding: 0 px 40px 10px;
     &-title {
       font-size: 32px;
       color: $brand;
@@ -53,12 +68,13 @@
     padding: 10px 0 30px 0;
     margin-top: 30px;
     background-color: $background;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    position: relative;
+    // width: 100vw;
+    // margin-left: calc(-50vw + 50%);
+    // margin-right: calc(-50vw + 50%);
+    // position: relative;
 
     &-wrapper {
+      max-width: $content-width;
       width: 85vw;
       margin: 0 auto;
       color: #fff !important;
@@ -72,12 +88,33 @@
   }
 
   &-structure {
+    max-width: $content-width;
+    width: 85vw;
+    margin: 0 auto;
+
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 130px;
+    gap: 20px;
+
+    &-content {
+      display: flex;
+      justify-content: space-between;
+
+      gap: 30px;
+    }
+
+    &-image {
+      width: 50%;
+
+      img {
+        width: 100%;
+      }
+    }
 
     &-info {
+      width: 40%;
       display: flex;
       flex-direction: column;
       gap: 30px;
@@ -86,6 +123,124 @@
     &-list {
       padding-left: 25px;
       font-size: 24px;
+    }
+  }
+}
+
+@include tablet {
+  .info__page {
+    &-text-start {
+      display: none;
+    }
+    &-text-end {
+      margin-top: 20px;
+      display: initial;
+    }
+  }
+}
+
+@include smallTablet {
+  .info__page {
+    &-structure {
+      &-content {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      &-info {
+        width: 100%;
+      }
+
+      &-image {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@include mobileLandscape {
+  .info__page {
+    &-title {
+      font-size: 36px;
+    }
+
+    &-item {
+      &-title {
+        font-size: 28px;
+      }
+      &-text {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .info__page {
+    &-items {
+      flex-direction: column;
+
+      &-line {
+        display: none;
+      }
+    }
+
+    &-item {
+      padding-bottom: 0px;
+    }
+  }
+}
+
+@include extraSmallMobile {
+  .info__page {
+    &-title {
+      font-size: 32px;
+    }
+    &-text {
+      font-size: 20px;
+    }
+    &-list {
+      font-size: 20px;
+    }
+  }
+}
+
+@include ultraSmallMobile {
+  .info__page {
+    &-title {
+      font-size: 28px;
+    }
+    &-text {
+      font-size: 18px;
+    }
+    &-list {
+      font-size: 18px;
+    }
+
+    &-item {
+      &-title {
+        font-size: 26px;
+      }
+      &-text {
+        font-size: 16px;
+      }
+    }
+  }
+}
+@include tinyMobile {
+  .info__page {
+    &-title {
+      font-size: 24px;
+    }
+
+    &-item {
+      &-title {
+        font-size: 22px;
+      }
+      &-text {
+        font-size: 14px;
+      }
     }
   }
 }
