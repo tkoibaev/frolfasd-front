@@ -45,3 +45,20 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ol {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li {
+  padding-left: 0;
+}
