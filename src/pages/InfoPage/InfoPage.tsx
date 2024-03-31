@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import styles from "./InfoPage.module.scss"
 import AboutCompanyBlock from "components/AboutCompanyBlock"
 import scheme from "assets/0446aae8b8230d81e3b95cec70aa1902.png"

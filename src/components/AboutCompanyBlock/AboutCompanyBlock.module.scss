@@ -40,21 +40,6 @@
     }
   }
 }
-@include mediumTablet {
-  .block {
-    // &__inner {
-    //   padding: 140px 0 60px 0;
-    // }
-  }
-}
-
-@include smallTablet {
-  .block {
-    &__inner {
-      // padding: 120px 0 50px 0;
-    }
-  }
-}
 
 @include mobileLandscape {
   .block {
