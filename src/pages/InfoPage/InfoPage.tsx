@@ -14,7 +14,7 @@ const InfoPage = () => {
   return (
     <>
       <div className={styles.info__page}>
-        <AboutCompanyBlock />
+        <AboutCompanyBlock isMainPage={false} />
         <div className={styles["info__page-wrapper"]}>
           <div className={styles["info__page-abilities"]}>
             <div>

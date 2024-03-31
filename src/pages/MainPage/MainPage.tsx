@@ -90,7 +90,7 @@ const MainPage = () => {
 
   return (
     <>
-      <AboutCompanyBlock />
+      <AboutCompanyBlock isMainPage={true} />
 
       <div className={styles.page}>
         {showButton && !isAuth && (

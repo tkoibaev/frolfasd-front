@@ -29,6 +29,15 @@
       flex-direction: column;
       gap: 10px;
     }
+
+    &_btn {
+      background-color: #ffffff00;
+
+      &:hover {
+        background-color: #fff;
+        color: $brand;
+      }
+    }
   }
 }
 @include mediumTablet {
