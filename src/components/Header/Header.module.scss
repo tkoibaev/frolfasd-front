@@ -70,7 +70,8 @@
   display: none;
 }
 
-@include mediumTablet {
+//был mediumTablet
+@include tablet {
   .header__inner_navmenu {
     display: none;
   }

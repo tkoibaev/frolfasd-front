@@ -1,28 +1,28 @@
-import { useEffect, useRef } from "react"
-import axios from "axios"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
-import { FieldValues, useForm } from "react-hook-form"
-import styles from "./LoginPage.module.scss"
-import Button from "components/Button"
-import { useDispatch } from "react-redux"
-import { setIsAuthAction } from "slices/AuthSlice"
-import { setIsMainPageAction } from "slices/PageSlice"
+import { useEffect, useRef } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { FieldValues, useForm } from "react-hook-form";
+import styles from "./LoginPage.module.scss";
+import Button from "components/Button";
+import { useDispatch } from "react-redux";
+import { setIsAuthAction } from "slices/AuthSlice";
+import { setIsMainPageAction } from "slices/PageSlice";
 
 const LoginPage = () => {
-  const form = useRef<HTMLFormElement>(null)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const form = useRef<HTMLFormElement>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(setIsMainPageAction(false))
-  }, [])
+    dispatch(setIsMainPageAction(false));
+  }, []);
 
   const forma = useForm({
     mode: "onChange", // I want to change it to onBlur
-  })
-  const { register, handleSubmit, formState } = forma
-  const { isValid, touchedFields, errors } = formState
+  });
+  const { register, handleSubmit, formState } = forma;
+  const { isValid, touchedFields, errors } = formState;
 
   const login = async (password: any) => {
     try {
@@ -31,20 +31,20 @@ const LoginPage = () => {
         data: {
           password: password,
         },
-      })
-      localStorage.setItem("token", response.data.token)
-      dispatch(setIsAuthAction(true))
-      navigate("/")
-      toast.success("Вы успешно вошли в систему!")
+      });
+      localStorage.setItem("token", response.data.token);
+      dispatch(setIsAuthAction(true));
+      navigate("/");
+      toast.success("Вы успешно вошли в систему!");
     } catch (error) {
-      toast.error("Неверный код доступа!")
-      throw error
+      toast.error("Неверный код доступа!");
+      throw error;
     }
-  }
+  };
 
   const handleFormSubmit = (data: FieldValues) => {
-    login(data.password)
-  }
+    login(data.password);
+  };
 
   return (
     <div className={styles.login}>
@@ -75,6 +75,7 @@ const LoginPage = () => {
             // value={passwordValue}
             // onChange={(e) => setPasswordValue(e.target.value)}
             placeholder="Введите код доступа*"
+            type="password"
           />
           {errors?.password && touchedFields.password && (
             <div className={styles.form__input_message}>
@@ -88,7 +89,7 @@ const LoginPage = () => {
         </Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
