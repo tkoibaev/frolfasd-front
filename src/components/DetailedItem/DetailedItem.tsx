@@ -48,32 +48,48 @@ const DetailedItem: React.FC<DetailedProps> = ({
 
   return (
     <div className={clsx(styles.slider, className)}>
-      <div className={styles.slider__images}>
-        <SliderButton
-          className={styles.left}
-          direction="prev"
-          moveSlide={prevSlide}
-        />
-        <SliderButton
-          className={styles.right}
-          direction="next"
-          moveSlide={nextSlide}
-        />
-        {facade.items.map((item, index) => {
-          return (
-            <div
-              className={
-                slideIndex == index + 1
-                  ? styles.slider__images_slide_active
-                  : styles.slider__images_slide
-              }
-              key={item.exterior_design_items_id}
-            >
-              <img src={item.exterior_design_items_url} alt="" />
-            </div>
-          )
-        })}
-      </div>
+      {!isAdminPage && facade.items.length <= 1 ? (
+        <div className={styles.slider__images}>
+          {" "}
+          <img
+            className={styles.slider__images_solo}
+            src={
+              facade.items.length == 1
+                ? facade.items[0].exterior_design_items_url
+                : facade.exterior_design_url
+            }
+            alt=""
+          />
+        </div>
+      ) : (
+        <div className={styles.slider__images}>
+          <SliderButton
+            className={styles.left}
+            direction="prev"
+            moveSlide={prevSlide}
+          />
+          <SliderButton
+            className={styles.right}
+            direction="next"
+            moveSlide={nextSlide}
+          />
+          {facade.items.map((item, index) => {
+            return (
+              <div
+                className={
+                  slideIndex == index + 1
+                    ? styles.slider__images_slide_active
+                    : styles.slider__images_slide
+                }
+                key={item.exterior_design_items_id}
+              >
+                <img src={item.exterior_design_items_url} alt="" />
+              </div>
+            )
+          })}
+        </div>
+      )}
+
       <div className={styles.slider__info}>
         {!isAdminPage ? (
           <div>
@@ -110,9 +126,11 @@ const DetailedItem: React.FC<DetailedProps> = ({
             Фото объекта {slideIndex} из {facade.items.length}
           </div>
         ) : (
-          <div className={styles.slider__info_count}>
-            Изображения отсутствуют
-          </div>
+          isAdminPage && (
+            <div className={styles.slider__info_count}>
+              Изображения отсутствуют
+            </div>
+          )
         )}
       </div>
 
