@@ -1,58 +1,58 @@
-import { useEffect, useLayoutEffect, useState, ChangeEvent } from "react"
-import styles from "./PortfolioPage.module.scss"
-import { ReceivedFacadeData } from "../../../types"
-import { Response } from "../../../types"
+import { useEffect, useLayoutEffect, useState, ChangeEvent } from "react";
+import styles from "./PortfolioPage.module.scss";
+import { ReceivedFacadeData } from "../../../types";
+import { Response } from "../../../types";
 
-import axios from "axios"
-import CardList from "components/CardList"
-import ModalWindow from "components/ModalWindow"
-import Button from "components/Button"
-import { Link } from "react-router-dom"
-import OrderForm from "components/OrderForm"
-import ApplicationIcon from "components/Icons/ApplicationIcon"
-import { useIsAuth } from "slices/AuthSlice"
-import { scroller } from "react-scroll"
-import TopIcon from "components/Icons/TopIcon"
-import { useDispatch } from "react-redux"
-import { setIsMainPageAction } from "slices/PageSlice"
+import axios from "axios";
+import CardList from "components/CardList";
+import ModalWindow from "components/ModalWindow";
+import Button from "components/Button";
+import { Link } from "react-router-dom";
+import OrderForm from "components/OrderForm";
+import ApplicationIcon from "components/Icons/ApplicationIcon";
+import { useIsAuth } from "slices/AuthSlice";
+import { scroller } from "react-scroll";
+import TopIcon from "components/Icons/TopIcon";
+import { useDispatch } from "react-redux";
+import { setIsMainPageAction } from "slices/PageSlice";
 
 const PortfolioPage = () => {
-  const isAuth = useIsAuth()
-  const dispatch = useDispatch()
-  const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
+  const isAuth = useIsAuth();
+  const dispatch = useDispatch();
+  const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([]);
   const [filteredFacadesItems, setFilteredFacadesItems] = useState<
     ReceivedFacadeData[]
-  >([])
-  const [isModalFormOpened, setIsModalFormOpened] = useState(false)
-  const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
-  const [showOrderButton, setShowOrderButton] = useState(false)
-  const [showTopButton, setShowTopButton] = useState(false)
-  const [filterValue, setFilterValue] = useState("")
+  >([]);
+  const [isModalFormOpened, setIsModalFormOpened] = useState(false);
+  const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true);
+  const [showOrderButton, setShowOrderButton] = useState(false);
+  const [showTopButton, setShowTopButton] = useState(false);
+  const [filterValue, setFilterValue] = useState("");
 
   const handleScroll = () => {
-    const header = document.getElementById("header")
-    if (!header) return
-    const rect = header.getBoundingClientRect()
-    setShowOrderButton(rect.top < -147)
-    setShowTopButton(rect.top < -147)
+    const header = document.getElementById("header");
+    if (!header) return;
+    const rect = header.getBoundingClientRect();
+    setShowOrderButton(rect.top < -147);
+    setShowTopButton(rect.top < -147);
     if (window.innerWidth < 1050) {
-      setShowOrderButton(true)
+      setShowOrderButton(true);
     }
-  }
+  };
 
   useEffect(() => {
-    dispatch(setIsMainPageAction(false))
-  }, [])
+    dispatch(setIsMainPageAction(false));
+  }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
     if (window.innerWidth < 1050) {
-      setShowOrderButton(true)
+      setShowOrderButton(true);
     }
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const getFacadesItems = async () => {
     try {
@@ -61,31 +61,31 @@ const PortfolioPage = () => {
         {
           method: "GET",
         }
-      )
-      setFacadesItems(response.data)
-      setFilteredFacadesItems(response.data)
-      setIsCardsLoading(false)
+      );
+      setFacadesItems(response.data);
+      setFilteredFacadesItems(response.data);
+      setIsCardsLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
-    getFacadesItems()
-  }, [])
+    getFacadesItems();
+  }, []);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     setFilteredFacadesItems(
       facadesItems.filter((facade) => {
         return facade.exterior_design_title
           .toLowerCase()
-          .includes(filterValue.toLowerCase())
+          .includes(filterValue.toLowerCase());
       })
-    )
-  }, [filterValue])
+    );
+  }, [filterValue]);
 
   return (
     <div className={styles.page}>
@@ -100,7 +100,7 @@ const PortfolioPage = () => {
       {showTopButton && (
         <div
           onClick={() => {
-            scroller.scrollTo("header", { smooth: true, duration: 300 })
+            scroller.scrollTo("header", { smooth: true, duration: 300 });
           }}
           className={!isAuth ? styles.totop_fix : styles.totop_fix_only}
         >
@@ -109,21 +109,19 @@ const PortfolioPage = () => {
       )}
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
-      <p className={styles.page__text}>
+      {/* <p className={styles.page__text}>
         Здесь кратко описано, что это за услуга / где и как используется. Также
         было бы полезно указать, какие материалы используются.
-      </p>
+      </p> */}
 
-      <h2 className={styles.page__text}>
-        Также вы можете найти объект по названию
-      </h2>
+      <h2 className={styles.page__text}>Вы можете найти объект по названию</h2>
       <input
         placeholder="Название объекта*"
         className={styles.page__input}
         type="text"
         value={filterValue}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setFilterValue(event.target.value)
+          setFilterValue(event.target.value);
         }}
       />
       <div className={styles.page__content}>
@@ -149,12 +147,12 @@ const PortfolioPage = () => {
       >
         <OrderForm
           onSuccessfulSubmit={() => {
-            setIsModalFormOpened(false)
+            setIsModalFormOpened(false);
           }}
         />
       </ModalWindow>
     </div>
-  )
-}
+  );
+};
 
-export default PortfolioPage
+export default PortfolioPage;
